@@ -288,12 +288,11 @@
                 if (names) note += " | Names: " + names;
                 if (diet) note += " | Dietary: " + diet;
 
-                // Encode note for URL
-                const encodedNote = encodeURIComponent(note);
+                // URL-encode the note, replace spaces with %20
+                let encodedNote = encodeURIComponent(note).replace(/%20/g, '%20');
 
-                // Build Venmo URL
-                const venmoUrl =
-                  `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
+                // Venmo URL
+                const venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
 
                 // Open Venmo in new tab
                 window.open(venmoUrl, "_blank");
