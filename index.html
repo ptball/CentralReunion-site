@@ -259,13 +259,17 @@
                 <!-- Dietary Restrictions -->
                 <div style="margin-bottom:12px;">
                   <label><strong>Dietary Restrictions *</strong></label>
-                  <input id="diet"
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter dietary restrictions – required (or 'None')">
+                  <select id="diet" class="form-control">
+                    <option value="" disabled >Select dietary restriction – required </option>
+                    <option value="None" selected>None</option>
+                    <option value="Dairy-free">Dairy-free</option>
+                    <option value="Gluten-free">Gluten-free</option>
+                    <option value="Nut-free">Nut-free</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                  </select>
                 </div>
               </div>
-
+              
               <div class="cta-buttons">
                 <button id="venmoBtn" class="btn-get-started" disabled>
                   Purchase Your Tickets
@@ -293,27 +297,32 @@
               const dietInput = document.getElementById("diet");
               const venmoBtn = document.getElementById("venmoBtn");
 
-              // Function to check if all fields are filled
+              // Enable button only when all fields are filled
               function checkFields() {
-                if (numInput.value && namesInput.value.trim() && dietInput.value.trim()) {
+                if (numInput.value && namesInput.value.trim() && dietInput.value) {
                   venmoBtn.disabled = false;
                 } else {
                   venmoBtn.disabled = true;
                 }
               }
 
-              // Add event listeners to check input on every change
               [numInput, namesInput, dietInput].forEach(input => {
                 input.addEventListener("input", checkFields);
+                input.addEventListener("change", checkFields); // for dropdown
               });
 
-              // Click handler
+              // Detect mobile vs desktop
+              function isMobile() {
+                return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+              }
+
+              // Venmo button click
               venmoBtn.addEventListener("click", function () {
                 const numAttendees = parseInt(numInput.value);
                 const names = namesInput.value.trim();
-                const diet = dietInput.value.trim();
+                const diet = dietInput.value;
 
-                // Safety check (should never fail because button is disabled)
+                // Safety check
                 if (!numAttendees || !names || !diet) {
                   alert("Please fill out all required fields before proceeding.");
                   return;
@@ -322,15 +331,40 @@
                 const ticketPrice = 40;
                 const totalAmount = numAttendees * ticketPrice;
 
+                // Build note
                 let note = "CMS 10 Year Reunion";
-                if (names) note += " | Names: " + names;
-                if (diet) note += " | Dietary: " + diet;
+                note += " | Names: " + names;
+                note += " | Dietary: " + diet;
 
-                // Encode note with clean spaces
-                const encodedNote = encodeURIComponent(note).replace(/%20/g, '%20');
+                // Encode special characters, keep spaces clean
+                const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
 
-                const venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
-                window.open(venmoUrl, "_blank");
+                let venmoUrl = "";
+
+                if (isMobile()) {
+                  // Mobile deep link
+                  venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}&note=${encodedNote}`;
+                  window.location = venmoUrl;
+                } else {
+                  // Desktop web URL
+                  venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
+                  window.open(venmoUrl, "_blank");
+                }
+              });
+
+              // Initialize select styling
+              if (!dietInput.value) {
+                dietInput.style.color = "#a0a0a0";
+                dietInput.style.fontStyle = "italic";
+              }
+              dietInput.addEventListener("change", function () {
+                if (!dietInput.value) {
+                  dietInput.style.color = "#a0a0a0";
+                  dietInput.style.fontStyle = "italic";
+                } else {
+                  dietInput.style.color = "#000";
+                  dietInput.style.fontStyle = "normal";
+                }
               });
               </script>
 
