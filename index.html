@@ -234,67 +234,102 @@
              
               <!-- <p class="emphasis-text">When you send the Venmo payment, please include the names of all the attendees for which you have purchased tickets, as well as any dietary retrictions.</p> -->
               <!-- Ticket Form -->
-              <div class="ticket-form" style="margin-bottom:20px;">
+              <div class="ticket-form" style="margin-bottom:20px; max-width:500px;">
 
                 <!-- Number of Attendees -->
                 <div style="margin-bottom:12px;">
-                  <label><strong>Number of Attendees</strong></label>
+                  <label><strong>Number of Attendees *</strong></label>
                   <input id="numAttendees"
                         type="number"
                         class="form-control"
-                        placeholder="1"
+                        placeholder="Enter number of attendees – required"
                         min="1"
-                        value="1">
+                        value="">
                 </div>
 
                 <!-- Attendee Names -->
                 <div style="margin-bottom:12px;">
-                  <label><strong>Attendee Names (comma separated)</strong></label>
+                  <label><strong>Attendee Names (comma separated) *</strong></label>
                   <input id="attendees"
                         type="text"
                         class="form-control"
-                        placeholder="John Smith, Jane Doe">
+                        placeholder="Enter names separated by commas – required">
                 </div>
 
                 <!-- Dietary Restrictions -->
                 <div style="margin-bottom:12px;">
-                  <label><strong>Dietary Restrictions</strong></label>
+                  <label><strong>Dietary Restrictions *</strong></label>
                   <input id="diet"
                         type="text"
                         class="form-control"
-                        placeholder="Vegetarian, Nut allergy, None">
+                        placeholder="Enter dietary restrictions – required (or 'None')">
                 </div>
               </div>
 
               <div class="cta-buttons">
-                <button id="venmoBtn" class="btn-get-started">
+                <button id="venmoBtn" class="btn-get-started" disabled>
                   Purchase Your Tickets
                 </button>
               </div>
 
-              <script>
-              document.getElementById("venmoBtn").addEventListener("click", function () {
-                // Get input values
-                const numAttendees = parseInt(document.getElementById("numAttendees").value) || 1;
-                const names = document.getElementById("attendees").value.trim();
-                const diet = document.getElementById("diet").value.trim();
+              <style>
+              /* Lighter placeholder text */
+              .ticket-form input::placeholder {
+                color: #a0a0a0; /* light gray */
+                font-style: italic;
+              }
 
-                // Calculate total amount
+              /* Disabled button styling */
+              #venmoBtn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+              }
+              </style>
+
+              <script>
+              // Elements
+              const numInput = document.getElementById("numAttendees");
+              const namesInput = document.getElementById("attendees");
+              const dietInput = document.getElementById("diet");
+              const venmoBtn = document.getElementById("venmoBtn");
+
+              // Function to check if all fields are filled
+              function checkFields() {
+                if (numInput.value && namesInput.value.trim() && dietInput.value.trim()) {
+                  venmoBtn.disabled = false;
+                } else {
+                  venmoBtn.disabled = true;
+                }
+              }
+
+              // Add event listeners to check input on every change
+              [numInput, namesInput, dietInput].forEach(input => {
+                input.addEventListener("input", checkFields);
+              });
+
+              // Click handler
+              venmoBtn.addEventListener("click", function () {
+                const numAttendees = parseInt(numInput.value);
+                const names = namesInput.value.trim();
+                const diet = dietInput.value.trim();
+
+                // Safety check (should never fail because button is disabled)
+                if (!numAttendees || !names || !diet) {
+                  alert("Please fill out all required fields before proceeding.");
+                  return;
+                }
+
                 const ticketPrice = 40;
                 const totalAmount = numAttendees * ticketPrice;
 
-                // Build note
                 let note = "CMS 10 Year Reunion";
                 if (names) note += " | Names: " + names;
                 if (diet) note += " | Dietary: " + diet;
 
-                // URL-encode the note, replace spaces with %20
-                let encodedNote = encodeURIComponent(note).replace(/%20/g, '%20');
+                // Encode note with clean spaces
+                const encodedNote = encodeURIComponent(note).replace(/%20/g, '%20');
 
-                // Venmo URL
                 const venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
-
-                // Open Venmo in new tab
                 window.open(venmoUrl, "_blank");
               });
               </script>
