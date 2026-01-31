@@ -1015,6 +1015,180 @@ section,
 }
 
 /*--------------------------------------------------------------
+# Updates Section
+--------------------------------------------------------------*/
+.updates .image-wrapper {
+  position: relative;
+}
+
+.updates .image-wrapper .image-box {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.updates .image-wrapper .image-box img {
+  transition: 0.5s transform;
+}
+
+.updates .image-wrapper .image-box:hover img {
+  transform: scale(1.05);
+}
+
+.updates .image-wrapper .experience-box {
+  position: absolute;
+  bottom: -30px;
+  right: 30px;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+.updates .image-wrapper .experience-box .years {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: var(--heading-font);
+}
+
+.updates .image-wrapper .experience-box .text {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+.updates .content {
+  padding-left: 2rem;
+}
+
+@media (max-width: 991.98px) {
+  .updates .content {
+    padding-left: 0;
+    margin-top: 10px;
+  }
+}
+
+.updates .content .section-header {
+  margin-bottom: 2rem;
+}
+
+.updates .content .section-header .subtitle {
+  display: inline-block;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.updates .content .section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+@media (max-width: 767.98px) {
+  .updates .content .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+.updates .content .highlight-text {
+  font-size: 1.1rem;
+  color: color-mix(in srgb, var(--heading-color), transparent 20%);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.updates .content .features-list {
+  margin-bottom: 2.5rem;
+}
+
+.updates .content .features-list .feature-item {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.updates .content .features-list .feature-item:last-child {
+  margin-bottom: 0;
+}
+
+.updates .content .features-list .feature-item .icon-box {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: 0.1s;
+}
+
+.updates .content .features-list .feature-item .icon-box:hover {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  transform: translateY(-5px);
+}
+
+.updates .content .features-list .feature-item .text h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.updates .content .features-list .feature-item .text p {
+  margin-bottom: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+
+.updates .content .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.updates .content .cta-buttons .btn-get-started {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: 0.1s;
+  display: grid;
+  place-items: center;
+}
+
+.updates .content .cta-buttons .btn-get-started:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-3px);
+}
+
+.updates .content .cta-buttons .btn-learn-more {
+  background-color: transparent;
+  color: var(--accent-color);
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 500;
+  border: 2px solid color-mix(in srgb, var(--accent-color), transparent 80%);
+  transition: 0.1s;
+}
+
+.updates .content .cta-buttons .btn-learn-more:hover {
+  border-color: var(--accent-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 95%);
+  transform: translateY(-3px);
+}
+
+/*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
 .about .image-wrapper {
