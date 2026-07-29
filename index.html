@@ -180,7 +180,7 @@
                   </div>
                   <div class="text">
                     <h4>Dinner</h4>
-                    <p>Arrive hungry as we'll have food trucks for us all to enjoy.</p>
+                    <p>Arrive hungry as dinner will be available via food trucks for purchase.</p>
                   </div>
                 </div>
 
@@ -248,7 +248,6 @@
                 </div>
               </div>
              
-              <!-- <p class="emphasis-text">When you send the Venmo payment, please include the names of all the attendees for which you have purchased tickets, as well as any dietary retrictions.</p> -->
               <!-- Ticket Form -->
               <div class="ticket-form" style="margin-bottom:20px; max-width:500px;">
 
@@ -272,7 +271,7 @@
                         placeholder="Enter names separated by commas – required">
                 </div>
 
-                <!-- Dietary Restrictions -->
+                <!-- Dietary Restrictions
                 <div style="margin-bottom:12px;">
                   <label><strong>Dietary Restrictions *</strong></label>
                   <select id="diet" class="form-control">
@@ -284,7 +283,7 @@
                     <option value="Vegetarian">Vegetarian</option>
                   </select>
                 </div>
-              </div>
+              </div> -->
               
               <div class="cta-buttons">
                 <button id="venmoBtn" class="btn-get-started" disabled>
@@ -350,7 +349,7 @@
                 // Build note
                 let note = "CMS 10 Year Reunion ($15/person)";
                 note += " | Names: " + names;
-                note += " | Dietary: " + diet;
+                // note += " | Dietary: " + diet;
 
                 // Encode special characters, keep spaces clean
                 const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
