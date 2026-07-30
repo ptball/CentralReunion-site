@@ -352,13 +352,13 @@
                 // note += " | Dietary: " + diet;
 
                 // Encode special characters, keep spaces clean
-                const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
+                // const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
 
                 let venmoUrl = "";
 
                 if (isMobile()) {
                   // Mobile deep link
-                  venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}&note=${encodedNote}`;
+                  venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}`;
                   window.location = venmoUrl;
                 } else {
                   // Desktop web URL
