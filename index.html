@@ -358,11 +358,13 @@
 
                 if (isMobile()) {
                   // Mobile deep link
+                  // venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}&note=${encodedNote}`;
                   venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}`;
                   window.location = venmoUrl;
                 } else {
                   // Desktop web URL
-                  venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
+                  // venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
+                  venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}`;
                   window.open(venmoUrl, "_blank");
                 }
               });
