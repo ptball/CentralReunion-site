@@ -309,19 +309,24 @@
               // Elements
               const numInput = document.getElementById("numAttendees");
               const namesInput = document.getElementById("attendees");
-              const dietInput = document.getElementById("diet");
+              // const dietInput = document.getElementById("diet");
               const venmoBtn = document.getElementById("venmoBtn");
 
               // Enable button only when all fields are filled
               function checkFields() {
-                if (numInput.value && namesInput.value.trim() && dietInput.value) {
+                // if (numInput.value && namesInput.value.trim() && dietInput.value) {
+                if (numInput.value && namesInput.value.trim()) {
                   venmoBtn.disabled = false;
                 } else {
                   venmoBtn.disabled = true;
                 }
               }
 
-              [numInput, namesInput, dietInput].forEach(input => {
+              // [numInput, namesInput, dietInput].forEach(input => {
+              //   input.addEventListener("input", checkFields);
+              //   input.addEventListener("change", checkFields); // for dropdown
+              // });
+              [numInput, namesInput].forEach(input => {
                 input.addEventListener("input", checkFields);
                 input.addEventListener("change", checkFields); // for dropdown
               });
@@ -335,10 +340,11 @@
               venmoBtn.addEventListener("click", function () {
                 const numAttendees = parseInt(numInput.value);
                 const names = namesInput.value.trim();
-                const diet = dietInput.value;
+                // const diet = dietInput.value;
 
                 // Safety check
-                if (!numAttendees || !names || !diet) {
+                // if (!numAttendees || !names || !diet) {
+                if (!numAttendees || !names) {
                   alert("Please fill out all required fields before proceeding.");
                   return;
                 }
@@ -352,37 +358,35 @@
                 // note += " | Dietary: " + diet;
 
                 // Encode special characters, keep spaces clean
-                // const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
+                const encodedNote = encodeURIComponent(note).replace(/%20/g, ' ');
 
                 let venmoUrl = "";
 
                 if (isMobile()) {
                   // Mobile deep link
-                  // venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}&note=${encodedNote}`;
-                  venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}`;
+                  venmoUrl = `venmo://paycharge?txn=pay&recipients=ShelbiBall-&amount=${totalAmount}&note=${encodedNote}`;
                   window.location = venmoUrl;
                 } else {
                   // Desktop web URL
-                  // venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
-                  venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}`;
+                  venmoUrl = `https://venmo.com/ShelbiBall-?txn=pay&amount=${totalAmount}&note=${encodedNote}`;
                   window.open(venmoUrl, "_blank");
                 }
               });
 
               // Initialize select styling
-              if (!dietInput.value) {
-                dietInput.style.color = "#a0a0a0";
-                dietInput.style.fontStyle = "italic";
-              }
-              dietInput.addEventListener("change", function () {
-                if (!dietInput.value) {
-                  dietInput.style.color = "#a0a0a0";
-                  dietInput.style.fontStyle = "italic";
-                } else {
-                  dietInput.style.color = "#000";
-                  dietInput.style.fontStyle = "normal";
-                }
-              });
+              // if (!dietInput.value) {
+              //   dietInput.style.color = "#a0a0a0";
+              //   dietInput.style.fontStyle = "italic";
+              // }
+              // dietInput.addEventListener("change", function () {
+              //   if (!dietInput.value) {
+              //     dietInput.style.color = "#a0a0a0";
+              //     dietInput.style.fontStyle = "italic";
+              //   } else {
+              //     dietInput.style.color = "#000";
+              //     dietInput.style.fontStyle = "normal";
+              //   }
+              // });
               </script>
 
               <!-- <div class="cta-buttons">
